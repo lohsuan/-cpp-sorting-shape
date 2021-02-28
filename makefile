@@ -1,8 +1,10 @@
 .PHONY: directories clean stat
 
 CFLAGS = -std=c++11 -Wfatal-errors #-fno-elide-constructors
-TESTS = test/ut_math_vector.h test/ut_convex_polygon.h
-HEADERS = src/math_vector.h src/convex_polygon.h
+TESTS = test/ut_math_vector.h test/ut_convex_polygon.h test/ut_circle.h \
+				
+HEADERS = src/math_vector.h src/convex_polygon.h src/circle.h \
+
 
 all: directories bin/test
 
