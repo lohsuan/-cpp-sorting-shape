@@ -62,3 +62,26 @@ TEST_F(ConvexPolygonTestFixture, Area) {
   ConvexPolygon cp = ConvexPolygon(vertices, 4);
   ASSERT_EQ(12, cp.area());
 }
+
+TEST_F(ConvexPolygonTestFixture, Centroid){
+  MathVector vertices[4] = {u, w, x, v};
+  MathVector o = centroid(vertices, 4);
+  ASSERT_EQ(2.5, o.component(1));
+  ASSERT_EQ(2, o.component(2));
+}
+
+TEST_F(ConvexPolygonTestFixture, Scale) {
+  MathVector v = w.scale(2);
+  ASSERT_EQ(8, v.component(1));
+  ASSERT_EQ(8, v.component(2));
+}
+
+TEST_F(ConvexPolygonTestFixture, Angle) {
+  MathVector vertices[4] = {u, w, x, v};
+  MathVector o = centroid(vertices, 4);
+  ASSERT_EQ(2.5, o.component(1));
+  ASSERT_EQ(2, o.component(2));
+  MathVector v1 = u-o;
+  MathVector v2 = v-o;
+  ASSERT_NEAR(74, v1.angleWith(v2), 1.0);
+}

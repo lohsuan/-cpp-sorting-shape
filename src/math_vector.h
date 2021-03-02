@@ -10,8 +10,8 @@ public:
   }
 
   MathVector(int dim){
-    _dim = dim;
-    _vec[dim] = {0};
+    double a[dim] = {0};
+    initialize(a, dim);
   }
 
   MathVector(double a[], int dim) {
@@ -23,13 +23,13 @@ public:
   }
 
   ~MathVector(){
-    if(_vec){
+    if(_vec != nullptr){
       delete [] _vec;
     }
   }
 
   MathVector & operator = (MathVector const & v) { // copy assignment
-    if(_vec){
+    if(_vec != nullptr){
       delete [] _vec;
     }
     initialize(v._vec, v._dim);
@@ -44,7 +44,7 @@ public:
     return result;
   }
 
-  double component(int index) const {
+  double & component(int index) const {
     return _vec[index-1];
   }
 
@@ -63,6 +63,14 @@ public:
     return result;
   }
 
+  double dot(MathVector const & v) {
+    double result = 0;
+    for(int i = 0; i < _dim; i++) {
+      result += _vec[i] * v._vec[i];
+    }
+    return result;
+  }
+
   MathVector scale(double scaler) const {
     MathVector result = *this;
     for (size_t i = 0; i < _dim; i++) {
@@ -71,8 +79,9 @@ public:
     return result;
   }
 
+
   double length() const {
-    double result;
+    double result = 0;
     for (size_t i = 0; i < _dim; i++) {
       result += _vec[i] * _vec[i];
     }
@@ -89,10 +98,15 @@ public:
     return sqrt(result);
   }
 
+  double angleWith(MathVector u) {
+      double result = dot(u)/(length()*u.length());
+      return acos(result)/M_PI*180;
+    }
+
+
 private:
   double * _vec;
   int _dim;
-
   void initialize(double * a, int dim){
     _dim = dim;
     _vec = new double[_dim];
@@ -102,5 +116,13 @@ private:
   }
 
 };
+
+MathVector centroid(MathVector u[], int n){
+  MathVector result = u[0];
+  for (size_t i = 1; i < n; i++) {
+    result = result.add(u[i]);
+  }
+  return result.scale(1.0/n);
+}
 
 #endif

@@ -2,7 +2,8 @@
 #define CIRCLE_H
 #include "./math_vector.h"
 #include <cmath>
-class Circle {
+
+class Circle{
 public:
   Circle(double r, MathVector origin = MathVector(2))
   : _r(r), _origin(origin)  // constructor initializer

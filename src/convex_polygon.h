@@ -24,7 +24,7 @@ public:
 
     double perimeter() const {
       double result = 0;
-      for (size_t i = 1; i <= _numberOfVertices; i++) {
+      for (size_t i = 1; i < _numberOfVertices; i++) {
         result += (_vertices[i] - _vertices[i-1]).length();
       }
       result += (_vertices[0] - _vertices[_numberOfVertices-1]).length();

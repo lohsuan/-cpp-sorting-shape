@@ -16,6 +16,18 @@ TEST(InnerProduct, add) {
   ASSERT_EQ(9, v.add(u).component(2));
 }
 
+TEST(InnerProduct, dot_on_MathVector){
+  double u[] = {1, 2};
+  double v[] = {3, 4};
+  MathVector a(u, 2);
+  MathVector b(v, 2);
+
+  double result = a.dot(b);
+  ASSERT_EQ(11, result);
+  ASSERT_EQ(1, a.component(1));
+}
+
+
 TEST(InnerProduct, copyConstructor){
   double u[] = {1, 2};
   MathVector a(u, 2);
