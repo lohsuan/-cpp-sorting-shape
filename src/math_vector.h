@@ -100,9 +100,14 @@ public:
 
   double angleWith(MathVector u) {
       double result = dot(u)/(length()*u.length());
-      return acos(result)/M_PI*180;
+      if(pointingOut(u))
+        return acos(result)/M_PI*180;
+      return 360 - acos(result)/M_PI*180;
     }
 
+  bool pointingOut(MathVector const & u){
+    return component(1)*u.component(2) - component(2)*u.component(1) >= 0;
+  }
 
 private:
   double * _vec;
@@ -124,5 +129,20 @@ MathVector centroid(MathVector u[], int n){
   }
   return result.scale(1.0/n);
 }
+
+class AngleComparator {
+public:
+  AngleComparator(MathVector const & g, MathVector const & r){
+    _g = g;
+    _r = r;
+  }
+  bool operator () (MathVector const & u, MathVector const & v){
+    return _r.angleWith(u-_g) < _r.angleWith(v-_g);
+  }
+
+private:
+  MathVector _g;
+  MathVector _r;
+};
 
 #endif
