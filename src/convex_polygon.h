@@ -4,6 +4,7 @@
 
 class ConvexPolygon{
 public:
+      friend class ConvexPolygonFactory;
       static ConvexPolygon create(MathVector vertices[], int numberOfVertices){
       MathVector g = centroid(vertices, numberOfVertices);
       MathVector r = vertices[0] - g;
@@ -50,6 +51,17 @@ public:
 private:
   int _numberOfVertices;
   MathVector * _vertices;
+};
+
+class ConvexPolygonFactory{
+public:
+  ConvexPolygon createConvexPolygon(MathVector vertices[], int numberOfVertices){
+    MathVector g = centroid(vertices, numberOfVertices);
+    MathVector r = vertices[0] - g;
+    AngleComparator comp(g, r);
+    std::sort(vertices, vertices+numberOfVertices, comp);
+    return ConvexPolygon(vertices, numberOfVertices);
+  }
 };
 
 #endif

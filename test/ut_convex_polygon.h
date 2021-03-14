@@ -108,3 +108,11 @@ TEST_F(ConvexPolygonTestFixture, VerticesNotOrderedAreaPerimeter){
   ASSERT_EQ(12, cp.area());
   ASSERT_EQ(14, cp.perimeter());
 }
+
+TEST_F(ConvexPolygonTestFixture, VerticesNotOrderedAreaPerimeterByFactory){
+  MathVector vertices[4] = {u, w, x, v};
+  ConvexPolygonFactory cpf;
+  ConvexPolygon cp = cpf.createConvexPolygon(vertices, 4);
+  ASSERT_EQ(12, cp.area());
+  ASSERT_EQ(14, cp.perimeter());
+}

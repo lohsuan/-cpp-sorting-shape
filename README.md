@@ -27,3 +27,7 @@ sorts the shapes in file _input.txt_ in decreasing order by perimeter, and write
 
 ### static member function
 static member function 跟 static member variable 一樣，獨立於物件存在。可以在沒有物件產生的狀況下被使用，所以他不能使用 this，也不能存取 class 裡的一般成員變數，當然也不能使用一般成員函式。也就是說，static member function 只能存取 static member variable。
+
+### Factory
+- an object that creates other objects
+  - createConvexPolygon: sort vertices, and then create polygon
