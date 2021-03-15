@@ -1,4 +1,4 @@
-
+#include "../src/bubblesort.h"
 // std::sort pratice
 
 TEST(SortTest, SortAscending) {
@@ -39,4 +39,24 @@ TEST(SortTest, SortAscendingByDistanceTo26) {
   ASSERT_EQ(32, myints[1]);
   ASSERT_EQ(33, myints[2]);
   ASSERT_EQ(12, myints[3]);
+}
+
+TEST(SortTest, BubbleSortIntergers) {
+  int a[5] = {5, 4, 3, 2, 1};
+  bubbleSort<int *>(a, a+5);
+  ASSERT_EQ(1, a[0]);
+  ASSERT_EQ(2, a[1]);
+  ASSERT_EQ(3, a[2]);
+  ASSERT_EQ(4, a[3]);
+  ASSERT_EQ(5, a[4]);
+}
+
+TEST(SortTest, BubbleSortDouble) {
+  double a[5] = {5.5, 4.5, 3.5, 2.5, 1.5};
+  bubbleSort<double*>(a, a+5);
+  ASSERT_EQ(1.5, a[0]);
+  ASSERT_EQ(2.5, a[1]);
+  ASSERT_EQ(3.5, a[2]);
+  ASSERT_EQ(4.5, a[3]);
+  ASSERT_EQ(5.5, a[4]);
 }
