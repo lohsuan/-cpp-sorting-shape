@@ -1,6 +1,7 @@
 #ifndef CONVEX_POLYGON_H
 #define CONVEX_POLYGON_H
 #include "./math_vector.h"
+#include "./bubblesort.h"
 
 class ConvexPolygon{
 public:
@@ -9,7 +10,8 @@ public:
       MathVector g = centroid(vertices, numberOfVertices);
       MathVector r = vertices[0] - g;
       AngleComparator comp(g, r);
-      std::sort(vertices, vertices+numberOfVertices, comp);
+      bubbleSort(vertices, vertices+numberOfVertices, comp);
+      // std::sort(vertices, vertices+numberOfVertices, comp);
       return ConvexPolygon(vertices, numberOfVertices);
     }
 private:
@@ -59,7 +61,8 @@ public:
     MathVector g = centroid(vertices, numberOfVertices);
     MathVector r = vertices[0] - g;
     AngleComparator comp(g, r);
-    std::sort(vertices, vertices+numberOfVertices, comp);
+    bubbleSort(vertices, vertices+numberOfVertices, comp);
+    // std::sort(vertices, vertices+numberOfVertices, comp);
     return ConvexPolygon(vertices, numberOfVertices);
   }
 };

@@ -9,7 +9,7 @@ TEST(SortTest, SortAscending) {
 }
 
 template<class T>
-bool greaterThan(T a, T b) {
+bool greaterThan(T & a, T & b) {
   return a>b;
 }
 
@@ -59,4 +59,61 @@ TEST(SortTest, BubbleSortDouble) {
   ASSERT_EQ(3.5, a[2]);
   ASSERT_EQ(4.5, a[3]);
   ASSERT_EQ(5.5, a[4]);
+}
+
+// template<class T>
+// bool greaterThan(T & a, T & b) {
+//   return a>b;
+// }
+
+TEST(BubbleSortTest, DescendingIntegers){
+  int a[5] = {7, 13, 5, 91, 60};
+  bubbleSort<int *>(a+0, a+5, greaterThan<int>);
+  ASSERT_EQ(5, a[4]);
+  ASSERT_EQ(7, a[3]);
+  ASSERT_EQ(13, a[2]);
+  ASSERT_EQ(60, a[1]);
+  ASSERT_EQ(91, a[0]);
+}
+
+
+template<class T>
+class ComparatorGreater{
+public:
+  bool operator() (T const & latter, T const & former){
+    return latter > former;
+  }
+};
+
+TEST(BubbleSortTest, DescendingIntegersByObject){
+  int a[5] = {7, 13, 5, 91, 60};
+  ComparatorGreater<int> greater;
+  bubbleSort<int *>(a+0, a+5, greater);
+  ASSERT_EQ(5, a[4]);
+  ASSERT_EQ(7, a[3]);
+  ASSERT_EQ(13, a[2]);
+  ASSERT_EQ(60, a[1]);
+  ASSERT_EQ(91, a[0]);
+}
+
+TEST(BubbleSortTest, DescendingIntegersByObjectOnArray){
+  std::array<int, 5> a = {7, 13, 5, 91, 60};
+  ComparatorGreater<int> greater;
+  bubbleSort(&a[0], &a[0]+5, greater);
+  ASSERT_EQ(5, a[4]);
+  ASSERT_EQ(7, a[3]);
+  ASSERT_EQ(13, a[2]);
+  ASSERT_EQ(60, a[1]);
+  ASSERT_EQ(91, a[0]);
+}
+
+TEST(BubbleSortTest, DescendingIntegersByObjectOnArrayIterator){
+  std::array<int, 5> a = {7, 13, 5, 91, 60};
+  ComparatorGreater<int> greater;
+  bubbleSort(a.begin(), a.end(), greater);
+  ASSERT_EQ(5, a[4]);
+  ASSERT_EQ(7, a[3]);
+  ASSERT_EQ(13, a[2]);
+  ASSERT_EQ(60, a[1]);
+  ASSERT_EQ(91, a[0]);
 }

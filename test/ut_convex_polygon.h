@@ -116,3 +116,19 @@ TEST_F(ConvexPolygonTestFixture, VerticesNotOrderedAreaPerimeterByFactory){
   ASSERT_EQ(12, cp.area());
   ASSERT_EQ(14, cp.perimeter());
 }
+
+TEST_F(ConvexPolygonTestFixture, VerticesNotOrderedByBubbleSort){
+  MathVector vertices[4] = {u, w, x, v};
+  MathVector g = centroid(vertices, 4);
+  MathVector r = vertices[0] - g;
+  AngleComparator comp(g, r);
+  bubbleSort(vertices, vertices+4, comp);
+  ASSERT_EQ(1, vertices[0].component(1));
+  ASSERT_EQ(0, vertices[0].component(2));
+  ASSERT_EQ(4, vertices[1].component(1));
+  ASSERT_EQ(0, vertices[1].component(2));
+  ASSERT_EQ(4, vertices[2].component(1));
+  ASSERT_EQ(4, vertices[2].component(2));
+  ASSERT_EQ(1, vertices[3].component(1));
+  ASSERT_EQ(4, vertices[3].component(2));
+}

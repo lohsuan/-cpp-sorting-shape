@@ -31,3 +31,62 @@ static member function 跟 static member variable 一樣，獨立於物件存在
 ### Factory
 - an object that creates other objects
   - createConvexPolygon: sort vertices, and then create polygon
+
+### C++ Template
+- 將 **資料型態參數化 **的功能。
+- function template
+```cpp
+template < 樣板參數型態 樣板參數名 [, 其他樣板參數] >
+原型回傳型態 函數名(參數型態 原型參數名, ...) {
+    //prototype codes;
+}
+```
+```cpp
+// normal function
+int myAdd(int a, int b) {
+    return a + b;
+}
+
+// function template
+template <class T>
+T myAdd(T a, T b)
+{
+    return a + b;
+}
+
+int a = 1, b = 2;
+myAdd<int>(a, b);
+```
+
+- class template
+```
+//normal class:
+class myClass {
+    myClass& add(const myClass& a) {
+        return *this;
+    }
+};
+
+//class template:
+template <class T>
+class myTClass
+{
+    T& add(const T& a) {
+        return *this;
+    }
+};
+
+int main() {
+    myTClass<int>  a, b;
+    myTClass<double> x,y;
+}
+```
+
+### std::sort
+- refer to std::sort to write our bubbleSort function
+- https://en.cppreference.com/w/cpp/algorithm/sort
+
+```cpp
+template< class RandomIt, class Compare >
+void sort( RandomIt first, RandomIt last, Compare comp );
+```
