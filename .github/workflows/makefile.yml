@@ -15,7 +15,7 @@ jobs:
     - uses: actions/checkout@v2
       
     - name: Install gtest manually
-      run: sudo apt-get update && sudo apt-get install g++ && sudo apt-get install make && sudo apt-get install libgtest-dev && cd /usr/src/gtest && sudo cmake CMakeLists.txt && sudo make && sudo cp *.a /usr/lib
+      run: sudo apt-get update && sudo apt-get install g++ && sudo apt-get install make && sudo apt-get install libgtest-dev && cd /usr/src/gtest && sudo cmake CMakeLists.txt && sudo make
     
     - name: Make directory and build
       run: make
